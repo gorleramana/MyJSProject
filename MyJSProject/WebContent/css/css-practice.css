@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 .background-color-body {
-	background-color:	rgb(0, 255, 191);
+	background-color: rgb(0, 255, 191);
 }
 
 /* Style the header */
@@ -10,14 +10,14 @@ header {
 	padding: 10px;
 	text-align: center;
 	color: white;
-  }
+}
 /* Style the footer */
-  footer {
+footer {
 	background-color: #777;
 	padding-top: 20px;
 	text-align: center;
 	color: white;
-	}
+}
 /* Carousel caption settings */
 .carousel-caption {
 	left: 0 !important;
@@ -31,7 +31,19 @@ header {
 .modal-content {
 	/* color: black !important; */
 	/* background-color: none; */
+	
 }
+
 .custom-margin-right {
 	margin-right: auto !important;
+}
+
+@page WordSection1 {
+	mso-page-orientation: landscape;
+	size: 841.95pt 595.35pt; /* EU A4 */
+	/* size:11.0in 8.5in; */ /* US Letter */
+}
+
+div.WordSection1 {
+	page: WordSection1;
 }

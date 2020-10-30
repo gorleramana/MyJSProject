@@ -1,43 +1,25 @@
-/**
- * This is a POC
- */
-function exportHTML(element, filename=''){
+function export2Word( element ) {
+	alert('you called me');
 
-	var HtmlHead = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
-	  
-    var EndHtml = "</body></html>";
-  
-    // complete html
-    var html = HtmlHead +document.getElementById("MainHTML").innerHTML+EndHtml;
+var html, link, blob, url, css;
 
-    // specify the type
-    var blob = new Blob(['\ufeff', html], {
-        type: 'application/msword'
-    });
-    
-    // Specify link url
-    var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
-    
-    // Specify file name
-    filename = filename?filename+'.doc':'document.doc';
-    
-    // Create download link element
-    var downloadLink = document.createElement("a");
+css = (
+  '<style>' +
+  '@page WordSection1{size: 841.95pt 595.35pt;mso-page-orientation: landscape;}' +
+  'div.WordSection1 {page: WordSection1;}' +
+  '</style>'
+);
 
-    document.body.appendChild(downloadLink);
-    
-    if(navigator.msSaveOrOpenBlob ){
-        navigator.msSaveOrOpenBlob(blob, filename);
-    }else{
-        // Create a link to the file
-        downloadLink.href = url;
-        
-        // Setting the file name
-        downloadLink.download = filename;
-        
-        // triggering the function
-        downloadLink.click();
-    }
-    
-    document.body.removeChild(downloadLink);
-    }
+html = element.innerHTML;
+blob = new Blob(['\ufeff', css + html], {
+  type: 'application/msword'
+});
+url = URL.createObjectURL(blob);
+link = document.createElement('A');
+link.href = url;
+link.download = 'Document';  // default name without extension 
+document.body.appendChild(link);
+if (navigator.msSaveOrOpenBlob ) navigator.msSaveOrOpenBlob( blob, 'Document.doc'); // IE10-11
+	else link.click();  // other browsers
+document.body.removeChild(link);
+};
